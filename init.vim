@@ -6,6 +6,7 @@ set cursorline
 set wrap
 set showcmd
 set wildmenu
+set shiftwidth=4
 
 set hlsearch
 exec "nohlsearch"
@@ -108,9 +109,6 @@ call plug#begin('~/.config/nvim/plugged')
 	"NerdTree
 	Plug 'preservim/nerdtree'
 
-	"align plug
-	Plug 'junegunn/vim-easy-align'
-
 	"multi-select like vs code
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
@@ -121,10 +119,19 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'jiangmiao/auto-pairs'
 	"vim-rainbow
 	Plug 'frazrepo/vim-rainbow'
+
+	"align plug
+	Plug 'junegunn/vim-easy-align'
+	"cs/ds/ys
 	Plug 'tpope/vim-surround'
+	"select by enter
+	Plug 'gcmt/wildfire.vim'
+
+	":GenTocGFM
+	Plug 'mzlogin/vim-markdown-toc'
+
 	"markdown-preview
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-	"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 
 call plug#end()
@@ -139,11 +146,17 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 "NERDTree config
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-b> :NERDTreeToggle<CR>
 
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-set encoding=utf-8
+" =====
+" ===== coc.nvim
+" =====
+"let g:coc_globle_extension = [	
+"      \ 'coc-json',
+"      \ 'coc-git',
+"      \ 'coc-cmake',
+"      \ 'coc-clangd',
+"      \ 'coc-vimlsp']
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -157,7 +170,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -171,17 +184,14 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-i> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -189,9 +199,9 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use K to show documentation in preview window.
-nnoremap <silent> <C-k> :call <SID>show_dcumentation()<CR>
+nnoremap <silent> <LEADER>m :call <SID>show_documentation()<CR>
 
-function! s:show_documentanion()
+function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
@@ -201,6 +211,25 @@ function! s:show_documentanion()
   endif
 endfunction
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" =====
+" ===== 
+" =====
 
 
 ""Treesitter 
@@ -251,3 +280,7 @@ nmap <leader>= <Plug>AirlineSelectNextTab
 	nmap <C-s> <Plug>MarkdownPreview
 	nmap <M-s> <Plug>MarkdownPreviewStop
 	nmap <C-p> <Plug>MarkdownPreviewToggle
+
+"vim-markdown-toc config:
+    let g:vmt_auto_update_on_save = 0
+
