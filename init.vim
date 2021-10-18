@@ -21,6 +21,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 noremap <LEADER>rv :e .nvimrc<CR>
 noremap <LEADER>rz :e ~/.zshrc<CR>
+noremap <LEADER>ri :e ~/.config/i3/config<CR>
 noremap <LEADER>rr :e ~/.config/ranger/rc.conf<CR>
 
 
@@ -266,6 +267,19 @@ nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>= <Plug>AirlineSelectNextTab
 
 
+nmap <leader>d1 <Plug>AirlineSelectTab1 :bd<CR>
+nmap <leader>d2 <Plug>AirlineSelectTab2 :bd<CR>
+nmap <leader>d3 <Plug>AirlineSelectTab3 :bd<CR>
+nmap <leader>d4 <Plug>AirlineSelectTab4 :bd<CR>
+nmap <leader>d5 <Plug>AirlineSelectTab5 :bd<CR>
+nmap <leader>d6 <Plug>AirlineSelectTab6 :bd<CR>
+nmap <leader>d7 <Plug>AirlineSelectTab7 :bd<CR>
+nmap <leader>d8 <Plug>AirlineSelectTab8 :bd<CR>
+nmap <leader>d9 <Plug>AirlineSelectTab9 :bd<CR>
+nmap <leader>d0 <Plug>AirlineSelectTab0 :bd<CR>
+nmap <leader>d- <Plug>AirlineSelectPrevTab :bd<CR>
+nmap <leader>d= <Plug>AirlineSelectNextTab :bd<CR>
+
 "markdown-preview config:
 	" set to 1, nvim will open the preview window after entering the markdown buffer
 	" default: 0
@@ -284,3 +298,5 @@ nmap <leader>= <Plug>AirlineSelectNextTab
 "vim-markdown-toc config:
     let g:vmt_auto_update_on_save = 0
 
+"wildfire config:
+    let g:wildfire_objects = ["i'", 'i"', "i\*", "i>", "i`", "i)", "i]", "i}", "ip", "it"]
