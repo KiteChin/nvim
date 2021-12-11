@@ -10,6 +10,9 @@ set wildmenu
 set shiftwidth=4
 " support for vim-polyglot
 set nocompatible
+"enter directory where current file in
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
 
 
 set hlsearch
@@ -29,13 +32,14 @@ noremap <LEADER>rz :e ~/.zshrc<CR>
 noremap <LEADER>ri :e ~/.config/i3/config<CR>
 noremap <LEADER>rr :e ~/.config/ranger/rc.conf<CR>
 
-
 noremap <C-k> 5<C-y>
 noremap <C-j> 5<C-e>
 inoremap <C-a> <ESC>A
 
 noremap J 5j
 noremap K 5k
+noremap E 3e
+noremap B 3b
 noremap H 0
 noremap L $
 noremap W 5w
@@ -104,7 +108,8 @@ call plug#begin('~/.config/nvim/plugged')
 	" Status line
 	"Plug 'theniceboy/eleline.vim'
 	"Plug 'ojroques/vim-scrollstatus'
-
+	"
+	Plug 'junegunn/fzf.vim'
 
 	"NerdTree
 	Plug 'preservim/nerdtree'
@@ -247,11 +252,17 @@ set cmdheight=2
 set updatetime=100
 set shortmess+=c
 
+nmap <leader>e :CocCommand explorer<CR>
+
 let g:coc_global_extensions = [
 		\'coc-marketplace', 
 		\'coc-vimlsp',
 		\'coc-cmake',
-		\'coc-git']
+		\'coc-git',
+		\'coc-json',
+		\'coc-clangd',
+		\'coc-tsserver']
+			
 
 inoremap <silent><expr> <TAB>
 		\ pumvisible() ? "\<C-n>" :
@@ -280,7 +291,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Use <LEADER>h to show documentation in preview window.
-nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
+nnoremap <silent> <LEADER>H :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -291,6 +302,8 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+
 nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
