@@ -45,11 +45,18 @@ noremap L $
 noremap W 5w
 noremap B 5b
 
+noremap <C-j> :move +1<CR>
+noremap <C-k> :move -2<CR>
+
 noremap <LEADER>w <C-w>w
-noremap <LEADER>k <C-w>k
 noremap <LEADER>j <C-w>j
+noremap <LEADER><S-j> <C-w>J
+noremap <LEADER>k <C-w>k
+noremap <LEADER><S-k> <C-w>K
 noremap <LEADER>h <C-w>h
+noremap <LEADER><S-h> <C-w>H
 noremap <LEADER>l <C-w>l
+noremap <LEADER><S-l> <C-w>L
 noremap <LEADER>o <C-w>o
 noremap <LEADER>q <C-w>q
 
@@ -80,8 +87,6 @@ vnoremap Y "+y
 
 nnoremap < <<
 nnoremap > >>
-
-nnoremap ; :
 
 nnoremap dp d%
 
