@@ -1,8 +1,13 @@
 {
 	"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd",
 	"coc.preferences.extensionUpdateCheck": "daily",
+
 	"suggest.noselect": true,
-	"suggest.enablePreview": false,
+	"codeLens.enable": true,
+
+	"colors.filetypes": ["*"],
+
+	// icon for completion Item
 	"suggest.completionItemKindLabels": {
 		"class": "\uf0e8",
 		"color": "\ue22b",
@@ -29,9 +34,6 @@
 		"unit": "\uf475",
 		"value": "\uf89f",
 		"variable": "\ue71b"
-	},
-	"codeLens.enable": true,
-	"coc.preferences.formatOnSaveFiletypes": [
-		"json"
-	]
+	}
+
 }

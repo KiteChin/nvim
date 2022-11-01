@@ -12,5 +12,4 @@ source $HOME/.config/nvim/submoudle/plug-in.vim
 ""	autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 ""endif
 "
-"
 

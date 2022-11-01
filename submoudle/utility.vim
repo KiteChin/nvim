@@ -1,19 +1,19 @@
 set nocompatible
 filetype plugin on
+" set tab for appointed space
+set tabstop=4
+set expandtab
+set autoindent
 
 "set the number of command in buffer
 set history=500
-set number
 set ignorecase
 set smartcase
+set clipboard+=unnamedplus
 "default on
 set hidden
+set number
 set relativenumber
-set clipboard+=unnamedplus
-" set tab for appointed space
-set ts=4
-set expandtab
-set autoindent
 
 set wildmenu
 set showcmd
