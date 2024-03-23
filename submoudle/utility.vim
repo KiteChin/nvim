@@ -2,8 +2,8 @@ set nocompatible
 filetype plugin on
 " set tab for appointed space
 set tabstop=4
-set expandtab
-set autoindent
+set shiftwidth=4
+set expandtab 
 
 "set the number of command in buffer
 set history=500
