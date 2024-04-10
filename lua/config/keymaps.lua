@@ -1,6 +1,10 @@
 local isLinux = false
+if isLinux then
+	vscode = ""
+else
+	vscode = require('vscode-neovim')
+end
 vim.g.mapleader = " "
-
 local mode_nv = { "n", "v" }
 local mode_n = { "n" }
 local mode_v = { "v" }
@@ -19,31 +23,31 @@ local nmappings =
 	{ from = "<Left>",            to = "<Nop>",                                                                mode = mode_n },
 	{ from = "<Right>",           to = "<Nop>",                                                                mode = mode_n },
     -- window hotkey          
-	{ from = "<LEADER>w",         to = "<C-w>w",                                                               mode = mode_n },
-	{ from = "<LEADER>j",         to = "<C-w>j",                                                               mode = mode_n },
-	{ from = "<LEADER>k",         to = "<C-w>k",                                                               mode = mode_n },
-	{ from = "<LEADER>h",         to = "<C-w>h",                                                               mode = mode_n },
-	{ from = "<LEADER>l",         to = "<C-w>l",                                                               mode = mode_n },
-	{ from = "<LEADER>o",         to = "<C-w>o",                                                               mode = mode_n },
-	{ from = "<LEADER>q",         to = "<C-w>q",                                                               mode = mode_n },
-	{ from = "<LEADER><S-j>",     to = "<C-w>J",                                                               mode = mode_n },
-	{ from = "<LEADER><S-k>",     to = "<C-w>K",                                                               mode = mode_n },  
-	{ from = "<LEADER><S-h>",     to = "<C-w>H",                                                               mode = mode_n },
-	{ from = "<LEADER><S-l>",     to = "<C-w>L",                                                               mode = mode_n },
-	{ from = "sj",                to = "<C-w>s",                                                               mode = mode_n },
-	{ from = "sl",                to = "<C-w>v",                                                               mode = mode_n },
-	{ from = "<up>",              to = ":res +5<CR>",                                                          mode = mode_n },
-	{ from = "<down>",            to = ":res -5<CR>",                                                          mode = mode_n },  
-	{ from = "<left>",            to = ":vertical resize-5<CR>",                                               mode = mode_n },
-	{ from = "<right>",           to = ":vertical resize+5<CR>",                                               mode = mode_n },
+	{ from = "<LEADER>w",         to = isLinux and "<C-w>w" or "<Cmd>lua vscode.call('workbench.action.focusNextGroup')<CR>", mode = mode_n },
+	{ from = "<LEADER>j",         to = isLinux and "<C-w>j" or "<Cmd>lua vscode.call('workbench.action.navigateDown')<CR>", mode = mode_n },
+	{ from = "<LEADER>k",         to = isLinux and "<C-w>k" or "<Cmd>lua vscode.call('workbench.action.navigateUp')<CR>", mode = mode_n },
+	{ from = "<LEADER>h",         to = isLinux and "<C-w>h" or "<Cmd>lua vscode.call('workbench.action.navigateLeft')<CR>", mode = mode_n },
+	{ from = "<LEADER>l",         to = isLinux and "<C-w>l" or "<Cmd>lua vscode.call('workbench.action.navigateRight')<CR>", mode = mode_n },
+	{ from = "<LEADER>o",         to = isLinux and "<C-w>o" or "", mode = mode_n },
+	{ from = "<LEADER>q",         to = isLinux and "<C-w>q" or "<Cmd>lua vscode.call('workbench.action.closeEditorsAndGroup')<CR>", mode = mode_n },
+	{ from = "<LEADER><S-j>",     to = isLinux and "<C-w>J" or "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupDown')<CR>", mode = mode_n },
+	{ from = "<LEADER><S-k>",     to = isLinux and "<C-w>K" or "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupUp')<CR>", mode = mode_n },  
+	{ from = "<LEADER><S-h>",     to = isLinux and "<C-w>H" or "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupLeft')<CR>", mode = mode_n },
+	{ from = "<LEADER><S-l>",     to = isLinux and "<C-w>L" or "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupRight')<CR>", mode = mode_n },
+	{ from = "sj",                to = isLinux and "<C-w>s" or "<Cmd>lua vscode.call('workbench.action.splitEditorDown')<CR>", mode = mode_n },
+	{ from = "sl",                to = isLinux and "<C-w>v" or "<Cmd>lua vscode.call('workbench.action.splitEditor')<CR>", mode = mode_n },
+	{ from = "<up>",              to = isLinux and ":res +5<CR>" or "<Cmd>lua vscode.call('workbench.action.increaseViewHeight')<CR>", mode = mode_n },
+	{ from = "<down>",            to = isLinux and ":res -5<CR>" or "<Cmd>lua vscode.call('workbench.action.decreaseViewHeight')<CR>", mode = mode_n },  
+	{ from = "<left>",            to = isLinux and ":vertical resize-5<CR>" or "<Cmd>lua vscode.call('workbench.action.decreaseViewWidth')<CR>", mode = mode_n },
+	{ from = "<right>",           to = isLinux and ":vertical resize+5<CR>" or "<Cmd>lua vscode.call('workbench.action.increaseViewWidth')<CR>", mode = mode_n },
     -- buffer hotkey          
 	{ from = "<silent> [b",       to = ":bprevious<CR>",                                                       mode = mode_n },
 	{ from = "<silent> ]b",       to = ":bnext<CR>",                                                           mode = mode_n },
 	{ from = "<silent> [B",       to = ":bfirst<CR>",                                                          mode = mode_n },
 	{ from = "<silent> ]B",       to = ":blast<CR>",                                                           mode = mode_n },
     -- for file operation          
-	{ from = "<LEADER>s",         to = ":w<CR>",                                                               mode = mode_n },
-	{ from = "<LEADER>q",         to = ":q<CR>",                                                               mode = mode_n },
+	{ from = "<LEADER>s",         to = isLinux and ":w<CR>" or "<Cmd>lua vscode.call('workbench.action.files.save')<CR>",                                                               mode = mode_n },
+	{ from = "<LEADER>q",         to = isLinux and ":q<CR>" or "<Cmd>lua vscode.call('workbench.action.closeGroup')<CR>",                                                               mode = mode_n },
 	{ from = "<leader>R",         to = ":source $MYVIMRC<CR>",                                                 mode = mode_n },
 	{ from = "<LEADER>rc",        to = ":e ~/.config/nvim/init.vim<CR>",                                       mode = mode_n },
 	{ from = "<LEADER>ri",        to = isLinux and ":e ~/.config/i3/config<CR>" or "",                         mode = mode_n },
