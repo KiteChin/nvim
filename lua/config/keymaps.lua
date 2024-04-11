@@ -4,6 +4,7 @@ if isLinux then
 else
 	vscode = require('vscode-neovim')
 end
+
 vim.g.mapleader = " "
 local mode_nv = { "n", "v" }
 local mode_n = { "n" }
@@ -46,8 +47,8 @@ local nmappings =
 	{ from = "<silent> [B",       to = ":bfirst<CR>",                                                          mode = mode_n },
 	{ from = "<silent> ]B",       to = ":blast<CR>",                                                           mode = mode_n },
     -- for file operation          
-	{ from = "<LEADER>s",         to = isLinux and ":w<CR>" or "<Cmd>lua vscode.call('workbench.action.files.save')<CR>",                                                               mode = mode_n },
-	{ from = "<LEADER>q",         to = isLinux and ":q<CR>" or "<Cmd>lua vscode.call('workbench.action.closeGroup')<CR>",                                                               mode = mode_n },
+	{ from = "<LEADER>s",         to = isLinux and ":w<CR>" or "<Cmd>lua vscode.call('workbench.action.files.save')<CR>", mode = mode_n },
+	{ from = "<LEADER>q",         to = isLinux and ":q<CR>" or "<Cmd>lua vscode.call('workbench.action.closeActiveEditor')<CR>", mode = mode_n },
 	{ from = "<leader>R",         to = ":source $MYVIMRC<CR>",                                                 mode = mode_n },
 	{ from = "<LEADER>rc",        to = ":e ~/.config/nvim/init.vim<CR>",                                       mode = mode_n },
 	{ from = "<LEADER>ri",        to = isLinux and ":e ~/.config/i3/config<CR>" or "",                         mode = mode_n },
@@ -57,10 +58,10 @@ local nmappings =
     -- tag hotkey          
 	{ from = "tt",                to = ":tabe<CR>",                                                            mode = mode_n },
 	{ from = "tT",                to = ":tab split<CR>",                                                       mode = mode_n },
-	{ from = "th",                to = ":-tabnext<CR>",                                                        mode = mode_n },
-	{ from = "tl",                to = ":+tabnext<CR>",                                                        mode = mode_n },   
-	{ from = "tmh",               to = ":-tabmove<CR>",                                                        mode = mode_n },
-	{ from = "tml",               to = ":+tabmove<CR>",                                                        mode = mode_n },
+	{ from = "th",                to = isLinux and ":-tabnext<CR>" or "<Cmd>lua vscode.call('workbench.action.nextEditor')<CR>", mode = mode_n },
+	{ from = "tl",                to = isLinux and ":+tabnext<CR>" or "<Cmd>lua vscode.call('workbench.action.previousEditor')<CR>", mode = mode_n },   
+	{ from = "tmh",               to = isLinux and ":-tabmove<CR>" or "<Cmd>lua vscode.call('workbench.action.moveEditorLeftInGroup')<CR>", mode = mode_n },
+	{ from = "tml",               to = isLinux and ":+tabmove<CR>" or "<Cmd>lua vscode.call('workbench.action.moveEditorRightInGroup')<CR>", mode = mode_n },
     -- set ex history scroll          
 	{ from = "<C-p>",             to = "<Up>",                                                                 mode = mode_nv},
 	{ from = "<C-n>",             to = "<Down>",                                                               mode = mode_nv},
