@@ -18,4 +18,5 @@ opt.wildmenu = true
 opt.showcmd = true
 opt.wrap = true
 opt.cursorline = true
+opt.foldmethod = "syntax"
 -- syntax on
