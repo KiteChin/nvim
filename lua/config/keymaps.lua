@@ -1,6 +1,7 @@
 vscode =not vim.g.vscode and "" or require('vscode-neovim')
 
 vim.g.mapleader = " "
+local keymaps_file = vim.fn.expand('$HOME') .. '/AppData/Local/nvim/lua/config/keymaps.lua'
 local mode_nv = { "n", "v" }
 local mode_n = { "n" }
 local mode_v = { "v" }
@@ -24,7 +25,7 @@ local nmappings =
 	{ from = "<LEADER>k",         to = "<C-w>k",                 vsto = "<Cmd>lua vscode.call('workbench.action.navigateUp')<CR>",                 mode = mode_n },
 	{ from = "<LEADER>h",         to = "<C-w>h",                 vsto = "<Cmd>lua vscode.call('workbench.action.navigateLeft')<CR>",               mode = mode_n },
 	{ from = "<LEADER>l",         to = "<C-w>l",                 vsto = "<Cmd>lua vscode.call('workbench.action.navigateRight')<CR>",              mode = mode_n },
-	{ from = "<LEADER>o",         to = "<C-w>o",                 vsto = "",                                                                        mode = mode_n },
+	{ from = "<LEADER>o",         to = "<C-w>o",                                                                                                   mode = mode_n },
 	{ from = "<LEADER>q",         to = "<C-w>q",                 vsto = "<Cmd>lua vscode.call('workbench.action.closeEditorsAndGroup')<CR>",       mode = mode_n },
 	{ from = "<LEADER><S-j>",     to = "<C-w>J",                 vsto = "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupDown')<CR>",  mode = mode_n },
 	{ from = "<LEADER><S-k>",     to = "<C-w>K",                 vsto = "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupUp')<CR>",    mode = mode_n },  
@@ -71,7 +72,7 @@ local nmappings =
 	{ from = "<LEADER>s",         to = ":w<CR>",                 vsto = "<Cmd>lua vscode.call('workbench.action.files.save')<CR>",                 mode = mode_n },
 	{ from = "<LEADER>q",         to = ":q<CR>",                 vsto = "<Cmd>lua vscode.call('workbench.action.closeActiveEditor')<CR>",          mode = mode_n },
 	{ from = "<leader>R",         to = ":source $MYVIMRC<CR>",                                                                                     mode = mode_n },
-	{ from = "<LEADER>rc",        to = ":e ~/.config/nvim/init.vim<CR>",  vsto = ":e ~/AppData/Local/nvim/lua/config/keymaps.lua<CR>",             mode = mode_n },
+	{ from = "<LEADER>rc",        to = ":e ~/.config/nvim/init.vim<CR>",  vsto = ":!code " .. keymaps_file .. "<CR>",                              mode = mode_n },
 	{ from = "<LEADER>ri",        to = ":e ~/.config/i3/config<CR>",      vsto = "",                                                               mode = mode_n },
 	{ from = "<LEADER>rr",        to = ":e ~/.config/ranger/rc.conf<CR>", vsto = "",                                                               mode = mode_n },
 	{ from = "<LEADER>ra",        to = ":e ~/.config/alacritty/alacritty.yml<CR>", vsto = "",                                                      mode = mode_n },
