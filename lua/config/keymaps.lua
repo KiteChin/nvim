@@ -31,8 +31,8 @@ local nmappings =
 	{ from = "<LEADER><S-k>",     to = "<C-w>K",                 vsto = "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupUp')<CR>",    mode = mode_n },  
 	{ from = "<LEADER><S-h>",     to = "<C-w>H",                 vsto = "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupLeft')<CR>",  mode = mode_n },
 	{ from = "<LEADER><S-l>",     to = "<C-w>L",                 vsto = "<Cmd>lua vscode.call('workbench.action.moveActiveEditorGroupRight')<CR>", mode = mode_n },
-	{ from = "sj",                to = "<C-w>s",                 vsto = "<Cmd>lua vscode.call('workbench.action.splitEditorDown')<CR>",            mode = mode_n },
-	{ from = "sl",                to = "<C-w>v",                 vsto = "<Cmd>lua vscode.call('workbench.action.splitEditor')<CR>",                mode = mode_n },
+	{ from = "<LEADER>sj",        to = "<C-w>s",                 vsto = "<Cmd>lua vscode.call('workbench.action.splitEditorDown')<CR>",            mode = mode_n },
+	{ from = "<LEADER>sl",        to = "<C-w>v",                 vsto = "<Cmd>lua vscode.call('workbench.action.splitEditor')<CR>",                mode = mode_n },
 	{ from = "<up>",              to = ":res +5<CR>",            vsto = "<Cmd>lua vscode.call('workbench.action.increaseViewHeight')<CR>",         mode = mode_n },
 	{ from = "<down>",            to = ":res -5<CR>",            vsto = "<Cmd>lua vscode.call('workbench.action.decreaseViewHeight')<CR>",         mode = mode_n },  
 	{ from = "<left>",            to = ":vertical resize-5<CR>", vsto = "<Cmd>lua vscode.call('workbench.action.decreaseViewWidth')<CR>",          mode = mode_n },
@@ -101,7 +101,7 @@ for _, mapping in ipairs(nmappings) do
 	vim.keymap.set(mapping.mode, mapping.from, mapTo, { noremap = true })
 end
 -- open terminal in vim
-vim.keymap.set("n", "<leader>:", "sl<leader>l:terminal<CR>i", { remap = true })
+-- vim.keymap.set("n", "<leader>:", "sl<leader>l:terminal<CR>i", { remap = true })
 
 if vim.g.vscode then
 	vim.keymap.set(mode_nv, "j", 'gj', {remap = true})
@@ -154,3 +154,4 @@ local function VSetSearch()
     vim.fn.setreg('/', search_pattern)
     vim.fn.setreg('s', temp)
 end
+
